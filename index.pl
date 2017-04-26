@@ -68,3 +68,57 @@ print ${$href}{'zdd'}, "\n" ;
 print $aref->[0], "\n" ;
 print $href->{'zdd'}, "\n" ;
 
+
+#####  匿名数组示例-开始  ######
+## 
+# $aref2 = $aref1; 将使得$aref2和$aref1指向同一个数组，
+# 如果想将$aref1指向的数组拷贝一份给$aref2的话，使用下面的方法，[]里面对数组进行解引用，而[]以解引用后的数组为内容生成了一个新的匿名数组，又赋值给$aref2
+# 不能使用下面的形式，外层的[]是不可缺少的。由于=左边是标量，所以右边的数组会被解释为标量环境，得到的是数组元素个数，而不是元素本身。但是如果加上[]就可以了，这样perl知道这是一个匿名数组的赋值
+
+my $aref1=[1,[2,3],[3,4,5]];      # 匿名数组
+
+$aref2 = $aref1;                  # 相同引用
+$aref3 = [@{$aref1}];             # 复制引用
+$aref4 = @{$aref1};               # 匿名数组个数
+
+print $aref1,"\n";                # array       ARRAY(0x1dda0f8)
+print $aref2->[1][1],"\n";        # array 同    $aref1
+print $aref3->[1][1],"\n";        # array 不同  $aref1
+print $aref4->[1][1],"\n";        # null  取值为匿名数组长度 
+
+#####  匿名数组示例-结束  ######
+
+
+
+#####  判断数组是否是引用-开始 #####
+
+my $aref1 = [1, 2, 0] ;
+
+print ref $aref1, "\n" ;          #输出 ARRAY
+
+if (ref $aref1) {
+    print "true\n" ;              #输出 true
+}
+
+#####  判断数组是否是引用-结束 #####
+
+
+
+
+
+#####  判断数组引用相同-开始 #####
+
+my $aref1 = [1, 2, 0] ;
+my $aref2 = $aref1 ;
+print $aref1, "\n" ;
+print $aref2, "\n" ;
+
+if ($aref1 eq $aref2) {
+    print "reference equal\n" ;
+}
+if($aref1 == $aref2) {
+    print "reference equal\n" ;
+}
+
+#####  判断数组引用相同-结束 #####
+
