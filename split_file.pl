@@ -9,7 +9,7 @@ open my $DATAFILE, '<', "$datafile" or die "Unable to open datafile:$!\n";
     while (<$DATAFILE>) {        
                             chomp;
                             %record = split /:\s*|\n/;
-                            print "$record{address}\t$record{name} $record{aliases}\n";
+                            print "$record{address}\t$record{room}\n";
                          }    
      close $DATAFILE;
 } 
@@ -25,7 +25,7 @@ aliases: shim shimmy
 owner: David Davis 
 department: software 
 building: main 
-room: 909 
+room: 
 manufacturer: Sun
 model: M4000 
 -=-
